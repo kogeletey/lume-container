@@ -25,4 +25,3 @@ update_lume () {
 }
 
 update_deno
-update_lume
