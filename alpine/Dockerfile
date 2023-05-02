@@ -10,6 +10,6 @@ WORKDIR /home/lume/
 RUN set -o errexit -o nounset; \
   addgroup -S -g 1001 lume; \
   adduser -D -G lume -S -h /home/lume/ -u 1001 lume; \
-  deno run --allow-all https://deno.land/x/lume@v${LUME_VERSION}/install.ts
+  deno install --allow-run --name lume --force --reload https://deno.land/x/lume_cli@v${LUME_VERSION}/mod.ts
 
 CMD ["lume"]
