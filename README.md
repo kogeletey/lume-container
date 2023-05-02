@@ -4,10 +4,10 @@ Fork for archive original repository [GitHub - lumeland/docker: Docker image for
 
 Updated  `Lume` Docker image(s):
 
-- Alpine Linux: [ghcr.io/kogeletey/lume-container:alpine](https://) (default)
-- CentOS: [ghcr.io/kogeletey/lume-container:centos](https://)
-- Debian: [ghcr.io/kogeletey/lume-container:debian](https://)
-- Ubuntu: [ghcr.io/kogeletey/lume-container:ubuntu](https://)
+- Alpine Linux: [ghcr.io/kogeletey/lume-container:alpine](https://github.com/kogeletey/lume-container/pkgs/container/lume-container) (default)
+- CentOS: [ghcr.io/kogeletey/lume-container:centos](https://github.com/kogeletey/lume-container/pkgs/container/lume-container)
+- Debian: [ghcr.io/kogeletey/lume-container:debian](https://github.com/kogeletey/lume-container/pkgs/container/lume-container)
+- Ubuntu: [ghcr.io/kogeletey/lume-container:ubuntu](https://github.com/kogeletey/lume-container/pkgs/container/lume-container)
 
 ## Updating Images
 
