@@ -1,16 +1,13 @@
-# docker
+# Lume SSG container image
 
-[![dockeri.co](https://dockeri.co/image/oscarotero/lume)](https://hub.docker.com/r/oscarotero/lume)
+Fork for archive original repository [GitHub - lumeland/docker: Docker image for Lume](https://github.com/lumeland/docker)
 
-[![Docker Stars](https://img.shields.io/docker/stars/oscarotero/lume.svg?style=flat-square)](https://hub.docker.com/r/oscarotero/lume)
-[![Docker Pulls](https://img.shields.io/docker/pulls/oscarotero/lume.svg?style=flat-square)](https://hub.docker.com/r/oscarotero/lume)
+Updated  `Lume` Docker image(s):
 
-Official `Lume` Docker image(s):
-
-- Alpine Linux: [oscarotero/lume:alpine](https://hub.docker.com/r/oscarotero/lume)
-- CentOS: [oscarotero/lume:centos](https://hub.docker.com/r/oscarotero/lume)
-- Debian: [oscarotero/lume:debian](https://hub.docker.com/r/oscarotero/lume) (default)
-- Ubuntu: [oscarotero/lume:ubuntu](https://hub.docker.com/r/oscarotero/lume)
+- Alpine Linux: [ghcr.io/kogeletey/lume-container:alpine](https://) (default)
+- CentOS: [ghcr.io/kogeletey/lume-container:centos](https://)
+- Debian: [ghcr.io/kogeletey/lume-container:debian](https://)
+- Ubuntu: [ghcr.io/kogeletey/lume-container:ubuntu](https://)
 
 ## Updating Images
 

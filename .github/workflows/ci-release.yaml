@@ -1,33 +1,45 @@
 name: Build and Publish Docker image(s)
 
+env:
+  # Use docker.io for Docker Hub if empty
+  REGISTRY: ghcr.io
+  # github.repository as <account>/<repo>
+  IMAGE_NAME: ${{ github.repository }}
+
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Retrieve Lume version from Dockerfile manifest
         id: lume_version
         run: echo ::set-output name=docker_tag::$(grep -m1 "ARG LUME_VERSION=" ./${{ matrix.distro }}/Dockerfile | cut -d "=" -f2 | tr -d '"')
+      - name: Setup Docker buildx
+        uses: docker/setup-buildx-action@v2
       - name: Log in to Docker Hub
         uses: docker/login-action@v1
         with:
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-          registry: docker.io
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
       - name: Build and push default Docker image
-        if: matrix.distro == 'debian'
-        uses: docker/build-push-action@v2
+        if: matrix.distro == 'alpine'
+        uses: docker/build-push-action@v4
         with:
           context: ./${{ matrix.distro }}/
           push: true
-          tags: oscarotero/lume:latest
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
       - name: Build and push Docker image
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v4
         with:
           context: ./${{ matrix.distro }}/
           push: true
-          tags: oscarotero/lume:${{ steps.lume_version.outputs.docker_tag }}-${{ matrix.distro }},oscarotero/lume:${{ matrix.distro }}
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.lume_version.outputs.docker_tag }}-${{ matrix.distro }},oscarotero/lume:${{ matrix.distro }}
     strategy:
       matrix:
         distro:

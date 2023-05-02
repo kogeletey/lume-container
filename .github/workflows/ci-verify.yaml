@@ -1,5 +1,12 @@
 name: Verify Docker image(s)
 
+env:
+  # Use docker.io for Docker Hub if empty
+  REGISTRY: ghcr.io
+  # github.repository as <account>/<repo>
+  IMAGE_NAME: ${{ github.repository }}
+
+
 defaults:
   run:
     shell: "bash -o errexit -o nounset -o pipefail {0}"
@@ -9,9 +16,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Build Docker image
-        run: docker build --file ./${{ matrix.distro }}/Dockerfile --tag oscarotero/lume:${{ matrix.distro }}-latest ./
+        run: docker build --file ./${{ matrix.distro }}/Dockerfile --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ matrix.distro }}-latest ./
     strategy:
       matrix:
         distro:
