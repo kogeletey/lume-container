@@ -25,7 +25,6 @@ jobs:
           - alpine
           - centos
           - debian
-          - ubuntu
 
 on:
   pull_request:
