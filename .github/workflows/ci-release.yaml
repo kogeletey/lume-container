@@ -20,11 +20,9 @@ jobs:
       - name: Log in to Docker Hub
         uses: docker/login-action@v1
         with:
-          password: ${{ secrets.GITHUB_TOKEN }}
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
-
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push default Docker image
         if: matrix.distro == 'alpine'
@@ -33,13 +31,21 @@ jobs:
           context: ./${{ matrix.distro }}/
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          build-args: |
+            "GITHUB_SHA=${GITHUB_SHA}"
+            "GITHUB_REF=${GITHUB_REF}"
+            "GITHUB_REPOSITORY=${GITHUB_REPOSITORY}"
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
           context: ./${{ matrix.distro }}/
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.lume_version.outputs.docker_tag }}-${{ matrix.distro }},oscarotero/lume:${{ matrix.distro }}
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.lume_version.outputs.docker_tag }}-${{ matrix.distro }},${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ matrix.distro }}
+          build-args: |
+            "GITHUB_SHA=${GITHUB_SHA}"
+            "GITHUB_REF=${GITHUB_REF}"
+            "GITHUB_REPOSITORY=${GITHUB_REPOSITORY}"
     strategy:
       matrix:
         distro:
