@@ -10,6 +10,6 @@ WORKDIR /home/lume/
 
 RUN set -o errexit -o nounset; \
   useradd --home-dir /home/lume/ --no-create-home --system --uid 1001 --user-group lume; \
-  deno run --allow-all https://deno.land/x/lume@v${LUME_VERSION}/install.ts
+  deno run --allow-all https://deno.land/x/lume@v${LUME_VERSION}/cli.ts
 
 CMD ["lume"]
