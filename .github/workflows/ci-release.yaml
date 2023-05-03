@@ -46,6 +46,11 @@ jobs:
             "GITHUB_SHA=${GITHUB_SHA}"
             "GITHUB_REF=${GITHUB_REF}"
             "GITHUB_REPOSITORY=${GITHUB_REPOSITORY}"
+      - name: remove untagged docker containers
+        uses: camargo/delete-untagged-action@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
     strategy:
       matrix:
         distro:
