@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v3
+      - name: Update Lume versiob to latest
+        run: bash update.sh
       - name: Retrieve Lume version from Dockerfile manifest
         id: lume_version
         run: echo ::set-output name=docker_tag::$(grep -m1 "ARG LUME_VERSION=" ./${{ matrix.distro }}/Dockerfile | cut -d "=" -f2 | tr -d '"')
@@ -52,6 +54,8 @@ jobs:
           - debian
 
 on:
+  schedule:
+    - cron: '0 12 * * */6'
   push:
     branches:
       - main
