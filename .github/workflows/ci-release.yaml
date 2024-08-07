@@ -55,7 +55,6 @@ jobs:
       matrix:
         distro:
           - alpine
-          - distroless
           - debian
 
 on:
